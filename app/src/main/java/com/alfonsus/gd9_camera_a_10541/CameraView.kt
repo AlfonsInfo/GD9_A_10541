@@ -16,7 +16,7 @@ class CameraView (context: Context?, private val mCamera: Camera) : SurfaceView(
         mHolder.addCallback(this)
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS)
     }
-    override fun surfaceCreated(p0: SurfaceHolder) {
+    override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
         try{
             mCamera.setPreviewDisplay(mHolder)
             mCamera.startPreview()
@@ -26,20 +26,20 @@ class CameraView (context: Context?, private val mCamera: Camera) : SurfaceView(
         }
     }
 
-    override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+    override fun surfaceChanged(surfaceHolder: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
         if(mHolder.surface == null) return
         try{
             mCamera.setPreviewDisplay(mHolder)
             mCamera.startPreview()
         } catch (e : IOException)
         {
-            Log.d("error", "Camera error on SurfaceCreated" + e.message)
+            Log.d("Error", "Camera error on SurfaceCreated" + e.message)
         }
     }
-
-    override fun surfaceDestroyed(p0: SurfaceHolder) {
+    override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
         mCamera.stopPreview()
         mCamera.release()
     }
-
 }
+
+
